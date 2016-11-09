@@ -45,7 +45,7 @@ grafo *cria_grafo(int nro_vertices){
 grafo *cria_e_preenche_G_lendo_arquivo(){
     FILE *arq;
     char url[]="/home/knute/Documentos/C/grafos-ipe/vertices.txt";
-    char str[80];
+    char str[80], buf[120];
     char ch;
 
 
@@ -55,23 +55,26 @@ grafo *cria_e_preenche_G_lendo_arquivo(){
         return NULL;
     }
     else{
-        int numero, pos_x, pos_y, i=0, linha=1;
+        int numero, pos_x, pos_y, i=0, linha=0;
         char ch1, ch2, ch3;
 
         while(!feof(arq)){
             ch = fgetc(arq);
             if(ch == '\n'){
                 linha++;
-                printf("%d", linha);
                 }
             }
         grafo *G = cria_grafo(linha);
 
-        while(EOF != fscanf(arq, "%d%c %s%c %d%c %d", &numero, &ch1, str, &ch2, &pos_x, &ch3, &pos_y )){
+        fseek(arq, 0, SEEK_SET);
+
+        while(fgets(buf, sizeof buf, arq)!=NULL){
+            sscanf(buf, "%d%c %s%c %d%c %d", &numero, &ch1, str, &ch2, &pos_x, &ch3, &pos_y);
+            str[strlen(str)-1] = '\0';
             G->lista[i]->numero = numero;
             strcpy(G->lista[i]->nome, str);
-            G->lista[i]->pos_x = pos_x;
-            G->lista[i]->pos_y = pos_y;
+            G->lista[i]->latitude = pos_x;
+            G->lista[i]->longitude = pos_y;
             G->qtde_vertices++;
             i++;
             }
@@ -150,6 +153,7 @@ void preenche_arestas_lendo_arquivo(grafo *G){
 int numVertices(grafo *G){
     return G->qtde_vertices;
 }
+
 
 
 int grauVertice(grafo *G, int V){

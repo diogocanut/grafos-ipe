@@ -6,7 +6,7 @@ struct Aresta{
 };typedef struct Aresta aresta;
 
 struct Vertice{
-	int numero, pos_x, pos_y;
+	int numero, latitude, longitude;
 	char nome[20];
 	aresta* prox;
 };typedef struct Vertice vertice;
