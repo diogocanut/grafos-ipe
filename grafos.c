@@ -3,6 +3,7 @@
 #include <string.h>
 #include "grafos.h"
 
+
 grafo *cria_grafo(int nro_vertices){
     if(nro_vertices<0) return NULL;
 
@@ -41,29 +42,43 @@ grafo *cria_grafo(int nro_vertices){
 
 }
 
-void preenche_G_lendo_arquivo(grafo *G){
+grafo *cria_e_preenche_G_lendo_arquivo(){
     FILE *arq;
     char url[]="/home/knute/Documentos/C/grafos-ipe/vertices.txt";
     char str[80];
-
+    char ch;
 
 
     arq=fopen(url, "r");
-    if(arq==NULL)
+    if(arq==NULL){
         printf("Erro com o arquivo dos vertices, favor verificar\n");
+        return NULL;
+    }
     else{
-        int numero, pos_x, pos_y, i=0;
+        int numero, pos_x, pos_y, i=0, linha=1;
         char ch1, ch2, ch3;
 
-           while(EOF != fscanf(arq, "%d%c %s%c %d%c %d", &numero, &ch1, str, &ch2, &pos_x, &ch3, &pos_y )){
-                G->lista[i]->numero = numero;
-                strcpy(G->lista[i]->nome, str);
-                G->lista[i]->pos_x = pos_x;
-                G->lista[i]->pos_y = pos_y;
-                i++;
+        while(!feof(arq)){
+            ch = fgetc(arq);
+            if(ch == '\n'){
+                linha++;
+                printf("%d", linha);
+                }
+            }
+        grafo *G = cria_grafo(linha);
+
+        while(EOF != fscanf(arq, "%d%c %s%c %d%c %d", &numero, &ch1, str, &ch2, &pos_x, &ch3, &pos_y )){
+            G->lista[i]->numero = numero;
+            strcpy(G->lista[i]->nome, str);
+            G->lista[i]->pos_x = pos_x;
+            G->lista[i]->pos_y = pos_y;
+            G->qtde_vertices++;
+            i++;
             }
 
+        return G;
     }
+
 }
 
 aresta *cria_aresta(int P, int V2){
@@ -99,7 +114,7 @@ int percorre_verifica_cria_aresta(grafo *G, int V1, int V2, int P){
 }
 
 void insere_aresta(grafo *G, int V1, int V2, int P){
-
+    G->grau[V1]++;
     if(G->lista[V1]->prox==NULL){
         G->lista[V1]->prox = cria_aresta(P, V2);
 
@@ -107,8 +122,11 @@ void insere_aresta(grafo *G, int V1, int V2, int P){
     else{
         int x;
         x = percorre_verifica_cria_aresta(G,V1,V2,P);
-        if(x==1) printf("Aresta ja existente, insercao nao realizada\n");
+        if(x==1){
+            printf("Aresta ja existente, insercao nao realizada\n");
+            G->grau[V1]--;
     }
+  }
 }
 
 void preenche_arestas_lendo_arquivo(grafo *G){
@@ -123,13 +141,48 @@ void preenche_arestas_lendo_arquivo(grafo *G){
            while(EOF != fscanf(arq1, "%d %d %d", &V1, &V2, &P)){
                 printf("v1=%d v2= %d v3= %d\n" ,V1, V2, P);
                 insere_aresta(G,V1,V2,P);
-                insere_aresta(G,V2,V1,P);
-
+                G->qtde_arestas++;
         }
 
     }
 }
 
+int numVertices(grafo *G){
+    return G->qtde_vertices;
+}
 
 
+int grauVertice(grafo *G, int V){
+    return G->grau[V];
+}
+
+
+int busca(grafo *G, int V1, int V2){
+    if(G->grau[V1]==0) return 0;
+
+    aresta *aux;
+    aux = G->lista[V1]->prox;
+
+    if(aux->V2==V2){
+        return 1;
+    }
+    while(aux->prox!=NULL){
+        if(aux->V2==V2){
+        return 1;
+        }
+        aux = aux->prox;
+
+    }
+    return 0;
+}
+
+
+int ehAdjacente(grafo *G, int V1, int V2){
+    int x,y;
+    x = busca(G,V1,V2);
+    y = busca(G,V2,V1);
+    if(x==1||y==1) return 1;
+    else return 0;
+
+}
 

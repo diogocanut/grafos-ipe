@@ -18,8 +18,11 @@ struct Grafo{
 };typedef struct Grafo grafo;
 
 grafo *cria_grafo(int nro_vertices);
-void preenche_G_lendo_arquivo(grafo *G);
+grafo *cria_e_preenche_G_lendo_arquivo();
 aresta *cria_aresta(int P, int V2);
 int percorre_verifica_cria_aresta(grafo *G, int V1, int V2, int P);
 void insere_aresta(grafo *G, int V1, int V2, int P);
 void preenche_arestas_lendo_arquivo(grafo *G);
+int numVertices(grafo *G);
+int busca(grafo *G, int V1, int V2);
+int ehAdjacente(grafo *G, int V1, int V2);
