@@ -144,6 +144,7 @@ void preenche_arestas_lendo_arquivo(grafo *G){
            while(EOF != fscanf(arq1, "%d %d %d", &V1, &V2, &P)){
                 printf("v1=%d v2= %d v3= %d\n" ,V1, V2, P);
                 insere_aresta(G,V1,V2,P);
+                insere_aresta(G,V2,V1,P);
                 G->qtde_arestas++;
         }
 
@@ -182,10 +183,9 @@ int busca(grafo *G, int V1, int V2){
 
 
 int ehAdjacente(grafo *G, int V1, int V2){
-    int x,y;
+    int x;
     x = busca(G,V1,V2);
-    y = busca(G,V2,V1);
-    if(x==1||y==1) return 1;
+    if(x==1) return 1;
     else return 0;
 
 }
