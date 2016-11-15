@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "grafos.h"
+#define INFINITY 666
 
 
 grafo *cria_grafo(int nro_vertices){
@@ -75,7 +76,6 @@ grafo *cria_e_preenche_G_lendo_arquivo(){
             strcpy(G->lista[i]->nome, str);
             G->lista[i]->latitude = pos_x;
             G->lista[i]->longitude = pos_y;
-            G->qtde_vertices++;
             i++;
             }
 
@@ -142,7 +142,7 @@ void preenche_arestas_lendo_arquivo(grafo *G){
     else{
         int V1, V2, P;
            while(EOF != fscanf(arq1, "%d %d %d", &V1, &V2, &P)){
-                printf("v1=%d v2= %d v3= %d\n" ,V1, V2, P);
+
                 insere_aresta(G,V1,V2,P);
                 insere_aresta(G,V2,V1,P);
                 G->qtde_arestas++;
@@ -187,6 +187,26 @@ int ehAdjacente(grafo *G, int V1, int V2){
     x = busca(G,V1,V2);
     if(x==1) return 1;
     else return 0;
+
+}
+
+
+int dijkstra(grafo *G, int V0, int *D, int *A){
+    int i, *S;
+    S = calloc (G->qtde_vertices, sizeof(int *));
+    D = calloc (G->qtde_vertices, sizeof(int *));
+    A = calloc (G->qtde_vertices, sizeof(int *));
+    for(i=0;i<G->qtde_vertices;i++) A[i]=-1;
+    S[V0] = 1;
+    for(i=0;i<G->qtde_vertices;i++) D[i]=INFINITY;
+    D[V0] = 0;
+    for(i=0;i<G->qtde_vertices;i++){
+
+    }
+
+
+
+
 
 }
 
