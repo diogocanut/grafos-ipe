@@ -39,4 +39,23 @@
 
 
                 }
+
+
+
+
+
+                    printf("num: %d str: %s latitude: %d longitude: %d\n", G->lista[0]->numero, G->lista[0]->nome, G->lista[0]->latitude, G->lista[0]->longitude);
+    preenche_arestas_lendo_arquivo(G);
+    printf("\n\n%d", G->lista[1]->prox->V2);
+    printf("\n%d", grauVertice(G,1));
+    printf("\n%d", ehAdjacente(G,8,1));
+                    printf("v1=%d v2= %d v3= %d\n" ,V1, V2, P);
+
+
+
+
+
+
+
+
 */

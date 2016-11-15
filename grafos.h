@@ -26,3 +26,4 @@ void preenche_arestas_lendo_arquivo(grafo *G);
 int numVertices(grafo *G);
 int busca(grafo *G, int V1, int V2);
 int ehAdjacente(grafo *G, int V1, int V2);
+
