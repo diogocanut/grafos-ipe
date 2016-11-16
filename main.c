@@ -7,7 +7,8 @@ int main()
 {
 
 
-    int escolha, V1, V2, *D, *A;
+    int escolha, V1, V2;
+    int *D, *A;
     grafo *G;
     printf("Realizando leitura do grafo\n");
     G = cria_e_preenche_G_lendo_arquivo();
@@ -47,9 +48,6 @@ int main()
             printf("Digite o vertice inicial v0: \n");
             scanf("%d", &V1);
             dijkstra(G,V1,D,A);
-            int i;
-            for(i=0;i<G->qtde_vertices;i++){ printf("\n\n%d ---- %d", D[i], A[i]);}
-
 
         }
 

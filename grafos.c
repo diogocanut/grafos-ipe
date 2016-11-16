@@ -223,7 +223,7 @@ void dijkstra(grafo *G, int V0, int *D, int *A){
         D[i]=INFINITY;
     }
 
-
+    A[V0] = V0;
     D[V0] = 0;
 
 
@@ -231,13 +231,14 @@ void dijkstra(grafo *G, int V0, int *D, int *A){
         int mindist = INFINITY;
         for (v=0;v<G->qtde_vertices;v++){
             if(A[v] != -1){
-                for(a=G->lista[v]->prox;a!=NULL;a=a->prox);
+                for(a=G->lista[v]->prox;a!=NULL;a=a->prox){
                     if(A[a->V2] == -1 && mindist > D[v] + a->peso){
                        mindist = D[v] + a->peso;
                        v0 = v; w0 = a->V2;
                     }
                 }
             }
+        }
 
             if(mindist == INFINITY) break;
             A[w0] = v0;
