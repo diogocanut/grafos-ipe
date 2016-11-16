@@ -223,6 +223,7 @@ void dijkstra(grafo *G, int V0, int *D, int *A){
         D[i]=INFINITY;
     }
 
+
     D[V0] = 0;
 
 

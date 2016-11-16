@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1479246857 source:/home/knute/Documentos/C/grafos-ipe/main.c
+1479274643 source:/home/knute/Documentos/C/grafos-ipe/main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
