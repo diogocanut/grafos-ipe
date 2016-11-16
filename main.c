@@ -5,9 +5,9 @@
 
 int main()
 {
-    //modificar nomes das funcoes para camelCase.
-    //sempre releia o trabalho para atender a todos os requisitos
-    int escolha, V1, V2;
+
+
+    int escolha, V1, V2, *D, *A;
     grafo *G;
     printf("Realizando leitura do grafo\n");
     G = cria_e_preenche_G_lendo_arquivo();
@@ -18,7 +18,8 @@ int main()
     printf("\n\n1- Consultar numero de verticies que compoe o grafo\n");
     printf("2- Checar o grau de um dado vertice\n");
     printf("3- Checar adjacencia entre 2 vertices\n");
-    printf("4- Sair\n\n");
+    printf("4- Caminho mais curto com dijkstra\n");
+    printf("5- Sair\n\n");
     scanf("%d", &escolha);
 
         switch(escolha){
@@ -37,11 +38,22 @@ int main()
             scanf("%d %d", &V1, &V2);
             if(ehAdjacente(G,V1,V2)==1){
                 printf("Sao adjancentes\n");
+                break;
             }
-            else printf("Nao sao adjacentes\n");
+            else{ printf("Nao sao adjacentes\n"); break; }
+
+
+        case 4:
+            printf("Digite o vertice inicial v0: \n");
+            scanf("%d", &V1);
+            dijkstra(G,V1,D,A);
+            int i;
+            for(i=0;i<G->qtde_vertices;i++){ printf("\n\n%d ---- %d", D[i], A[i]);}
+
+
         }
 
-    }while(escolha!=4);
+    }while(escolha!=5);
 
 
 

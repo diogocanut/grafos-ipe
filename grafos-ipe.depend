@@ -1,17 +1,17 @@
 # depslib dependency file v1.0
-1479225117 source:/home/knute/Documentos/C/grafos-ipe/main.c
+1479246857 source:/home/knute/Documentos/C/grafos-ipe/main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"grafos.h"
 
-1479225215 source:/home/knute/Documentos/C/grafos-ipe/grafos.c
+1479274087 source:/home/knute/Documentos/C/grafos-ipe/grafos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"grafos.h"
 
-1479224986 /home/knute/Documentos/C/grafos-ipe/grafos.h
+1479274327 /home/knute/Documentos/C/grafos-ipe/grafos.h
 
-1479224117 source:/home/knute/Documentos/C/grafos-ipe/backup.c
+1479246857 source:/home/knute/Documentos/C/grafos-ipe/backup.c
 

@@ -182,6 +182,26 @@ int busca(grafo *G, int V1, int V2){
 }
 
 
+int busca_peso(grafo *G, int V1, int V2){
+    if(G->grau[V1]==0) return 0;
+
+    aresta *aux;
+    aux = G->lista[V1]->prox;
+
+    if(aux->V2==V2){
+        return aux->peso;
+    }
+    while(aux->prox!=NULL){
+        if(aux->V2==V2){
+        return aux->peso;
+        }
+        aux = aux->prox;
+
+    }
+    return 0;
+}
+
+
 int ehAdjacente(grafo *G, int V1, int V2){
     int x;
     x = busca(G,V1,V2);
@@ -191,22 +211,45 @@ int ehAdjacente(grafo *G, int V1, int V2){
 }
 
 
-int dijkstra(grafo *G, int V0, int *D, int *A){
-    int i, *S;
-    S = calloc (G->qtde_vertices, sizeof(int *));
+void dijkstra(grafo *G, int V0, int *D, int *A){
+    int i, v, v0, w0;
+    aresta *a;
+
     D = calloc (G->qtde_vertices, sizeof(int *));
     A = calloc (G->qtde_vertices, sizeof(int *));
-    for(i=0;i<G->qtde_vertices;i++) A[i]=-1;
-    S[V0] = 1;
-    for(i=0;i<G->qtde_vertices;i++) D[i]=INFINITY;
-    D[V0] = 0;
-    for(i=0;i<G->qtde_vertices;i++){
 
+    for(i=0;i<G->qtde_vertices;i++){
+        A[i]=-1;
+        D[i]=INFINITY;
     }
 
+    D[V0] = 0;
+
+
+    while (1) {
+        int mindist = INFINITY;
+        for (v=0;v<G->qtde_vertices;v++){
+            if(A[v] != -1){
+                for(a=G->lista[v]->prox;a!=NULL;a=a->prox);
+                    if(A[a->V2] == -1 && mindist > D[v] + a->peso){
+                       mindist = D[v] + a->peso;
+                       v0 = v; w0 = a->V2;
+                    }
+                }
+            }
+
+            if(mindist == INFINITY) break;
+            A[w0] = v0;
+            D[w0] = mindist;
+
+            }
+        }
 
 
 
 
-}
+
+
+
+
 
